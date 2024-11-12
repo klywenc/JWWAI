@@ -2,454 +2,200 @@
 <html lang="pl">
 
 <head>
-	<script defer>
-		let name = prompt('Jak masz na imię?', 'Alan Kalkowski');
-	</script>
-	<script defer>
-		document.write('<p>Ćw. 1. Witaj, ' + name + '</p>');
-	</script>
-	<script async>
-		const days = ['Pn','Wt','Sr','czw','pt'];
-		const playList = [];
-		const prefs = [1, 223, 'www.javascript.com', false];
-		const authors = [ 'Stan Lee',
-			'Simon Bisley',
-			'Grzegorz Rosiński',
-			'Todd McFarlane'
-		];
-		alert(days[0]);
-		days[days.length-1] = 'wcaleniepiatek';
-		alert(days[days.length-1]);
-		days[days.length] = 'sobota';
-		days.push('niedziela','poniedzielnik','poponiedzielnik')
-		days.unshift('eee');
-		// for (var i = 0; i > days.length; i++){
-		// 	alert(days[i])
-		// }
-		var p = [0,1,2,3];
-		var totalItems = p.push(4,5);
-		var removedItem = p.pop();
-	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Programowanie w JAVASCRIPT - template">
+    <meta name="author" content="dr inż. Jacek Paluszak">
+    <link rel="icon" href="img/favicon.ico">
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Programowanie w JAVASCRIPT - template">
-<meta name="author" content="dr inż. Jacek Paluszak">
-<link rel="icon" href="img/favicon.ico">
+    <title>Programowanie w JAVASCRIPT</title>
 
-<title>Programowanie w JAVASCRIPT</title>
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/navbar-fixed-top.css" rel="stylesheet">
+    <script src="js/ie-emulation-modes-warning.js"></script>
 
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
-<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-<link href="css/navbar-fixed-top.css" rel="stylesheet">
-<script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="js/jquery.easing.compatibility.js"></script>
 
-<!-- jQuery  -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
-<script src="js/jquery.easing.1.3.min.js"></script>
-<script src="js/jquery.easing.compatibility.js"></script>
-	<script>
-		let score = 0;
-		let q = 0;
+    <!-- Custom JavaScript and jQuery -->
+    <script>
+        $(document).ready(function() {
+            // Task 1: Highlight Quotes
+            $('span.pq').each(function() {
+                const quote = $(this).clone();
+                quote.removeClass('pq').addClass('pullquote');
+                $(this).before(quote);
+            });
 
-		const questions = [
-			['Ile księżyców ma Ziemia?', 1],
-			['Ile księżyców ma Saturn?', 62],
-			['Ile księżyców ma Wenus?', 0],
-			['Jakieś pytanie 1?', 42], // Przykładowe pytanie
-			['Jakieś pytanie 2?', 24]  // Przykładowe pytanie
-		];
+            // Task 2.1: Double-click to show dialog
+            $(document).dblclick(function() {
+                alert('Double-click detected on the page!');
+            });
 
-		function testQuestion(question, answer) {
-			if (answer == question[1]) {
-				score++;
-				alert('Prawidłowa odpowiedź!');
-			} else {
-				alert('Błędna odpowiedź. Prawidłowa odpowiedź to: ' + question[1]);
-			}
-		}
+            // Task 2.2: Mouseover to show new paragraph
+            const message = "<p>Wskazałeś odnośnik myszą!</p>";
+            $('#projekt3 a').hover(function() {
+                $('.main').append(message);
+            });
 
-		function displayFinalScore() {
-			let message = 'Liczba punktów: ' + score;
-			message += ' z ' + questions.length + '.';
-			document.write('<p>' + message + '</p>');
-		}
-	</script>
+            // Task 2.3: Change button text on click
+            $('#clickMeButton').click(function() {
+                $(this).val("zostałem kliknięty!");
+            });
 
+            // Task 2.4: Multiple buttons for style changes
+            $('#projekt4 button').each(function(index) {
+                $(this).click(function() {
+                    $(this).text(`NR ${index + 1} kliknięty`);
+                    const changeInfo = `<p>Button ${index + 1} changed element styles.</p>`;
+                    $('.main').append(changeInfo);
 
+                    // Example style changes
+                    $('.target-element').css({
+                        'color': '#'+Math.floor(Math.random()*16777215).toString(16),
+                        'font-size': (14 + index) + 'px',
+                    });
+                });
+            });
+
+            // Task 3: Filtering elements with buttons
+            $('#projekt5 button').click(function() {
+                $('table tr:even').css('background-color', '#f9f9f9'); // Style even rows
+            });
+
+            $('#projekt5 button').click(function() {
+                $('table tr:odd').css('background-color', '#e0e0e0'); // Style odd rows
+            });
+        });
+    </script>
+
+    <!-- CSS for pullquote and pq classes -->
+    <style>
+        .pullquote {
+            float: right;
+            clear: right;
+            width: 200px;
+            padding: 10px;
+            font-size: 20px;
+            background-color: rgba(255, 211, 224, 0.5);
+            border-radius: 10px;
+            margin: 20px 0 10px 10px;
+            font-style: italic;
+        }
+
+        .pq {
+            font-style: normal;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Navbar content -->
+        </div>
+    </nav>
 
-	<!-- navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
+    <!-- Main Content -->
+    <section id="main-page">
+        <div class="container">
+            <!-- Main content -->
+        </div>
+    </section>
 
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><img src="img/logo512x128.png"
-					height="40" alt=""></a> <a class="navbar-brand logotext" href="#">Laboratorium</a>
-			</div>
+    <!-- Project 1 Section: Quotes and Pullquotes -->
+    <section id="projekt1">
+        <div class="container">
+            <h1>Projekt 1</h1>
+            <p><span class="pq">"Success is not final; failure is not fatal: It is the courage to continue that counts."</span></p>
+            <p><span class="pq">"The only limit to our realization of tomorrow is our doubts of today."</span></p>
+        </div>
+    </section>
 
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#main-page"
-						class="btn btn-primary" title="Strona główna"> <span
-							class="glyphicon glyphicon-home"></span>
-					</a></li>
-					<li><a href="#projekt1">Projekt 1</a></li>
-					<li><a href="#projekt2">Projekt 2</a></li>
-					<li><a href="#form" data-toggle="modal"
-						data-target="#ModalForm">Kontakt</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Opcje <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Akcja 1</a></li>
-							<li><a href="#">Akcja 2</a></li>
-							<li><a href="#">Akcja 3</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Linki</li>
-							<li><a href="#">Link 1</a></li>
-							<li><a href="#">Link 2</a></li>
-						</ul></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
+    <!-- Project 2 Section: Events -->
+    <section id="projekt2">
+        <div class="container">
+            <h1>Projekt 2</h1>
+            <!-- Other content -->
+        </div>
+    </section>
 
-	</nav>
+    <!-- Project 3 Section: Mouseover Links -->
+    <section id="projekt3">
+        <div class="container">
+            <h1>Projekt 3</h1>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <div class="main"></div>
+        </div>
+    </section>
 
-	<!-- Main container -->
-	<section id="main-page">
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Języki wysokiego poziomu <br> w aplikacjach internetowych</h1>
-				<div class="row">
-					<div class="col-md-2" align="left"><p>nazwisko:</p></div>
-					<div class="col-md-4"><p id="surname">Kalkowski</p></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" align="left"><p>imię:</p></div>
-					<div class="col-md-4"><p id="name">Alan</p></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" align="left"><p>grupa:</p></div>
-					<div class="col-md-4"><p id="group">PBDiOU</p></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" align="left"><p>email:</p></div>
-					<div class="col-md-4"><p id="email">20449@student.ans-elblag.pl</p></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" align="left"><p>nr indeksu:</p></div>
-					<div class="col-md-4"><p id="index">20449</p></div>
-				</div>
-				<button onclick="showInfo()">Pokaż dane</button>
-			</div>
-		</div>
-	</section>
+    <!-- Project 4 Section: Style-changing Buttons -->
+    <section id="projekt4">
+        <div class="container">
+            <h1>Projekt 4</h1>
+            <button id="clickMeButton">Kliknij mnie</button>
+            <div class="target-element">
+                <p>Element to change style.</p>
+            </div>
+            <!-- Additional numbered buttons for changing styles -->
+            <button>Button 1</button>
+            <button>Button 2</button>
+            <button>Button 3</button>
+            <!-- More buttons as needed -->
+        </div>
+    </section>
 
-	<script>
-		const elements = ["Alan", "Kalkowski", "PBDiOU", "20449@student.ans-elblag.pl", "20449"];
+    <!-- Project 5 Section: Table Filtering -->
+    <section id="projekt5">
+        <div class="container">
+            <h1>Projekt 5</h1>
+            <table border="1">
+                <tr><td>Row 1</td></tr>
+                <tr><td>Row 2</td></tr>
+                <tr><td>Row 3</td></tr>
+                <!-- Additional rows as needed -->
+            </table>
+            <button>Style even rows</button>
+            <button>Style odd rows</button>
+        </div>
+    </section>
 
-		document.getElementById('surname').textContent = elements[0];
-		document.getElementById('name').textContent = elements[1];
-		document.getElementById('group').textContent = elements[2];
-		document.getElementById('email').textContent = elements[3];
-		document.getElementById('index').textContent = elements[4];
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Polityka prywatności</button>
+        </div>
+    </footer>
 
-		let i = 0;
-		let output = "";
-		while (i < elements.length) {
-			output += elements[i] + " ";
-			i++;
-		}
-		console.log("while loop: " + output.trim());
+    <!-- Modal for Privacy Policy -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Polityka prywatności</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Polityka prywatności...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		let outputFor = "";
-		for (let j = 0; j < elements.length; j++) {
-			outputFor += elements[j] + " ";
-		}
-		console.log("for loop: " + outputFor.trim());
-
-		function showInfo() {
-			const surname = document.getElementById('surname').textContent;
-			const name = document.getElementById('name').textContent;
-			const group = document.getElementById('group').textContent;
-			const email = document.getElementById('email').textContent;
-			const index = document.getElementById('index').textContent;
-			alert(`Nazwisko: ${surname}\nImię: ${name}\nGrupa: ${group}\nEmail: ${email}\nNr indeksu: ${index}`);
-		}
-	</script>
-
-	<!-- /container -->
-
-	<section id="projekt1">
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Projekt 1</h1>
-
-				<p>Miejsce na projekt laboratoryjny</p>
-				<script>
-					const colleagues = ['Adam','Alan','Wiktor','Mariusz','Gitara'];
-					document.write('<p>Pierwszy element to <strong>');
-					document.write(colleagues[0]+ '</strong></p>')
-					const totalElements = document.querySelectorAll('*').length;
-					document.write('<p>laczna ilosc elementow na stronie')
-					document.write(totalItems + '</p>')
-				</script>
-
-			</div>
-		</div>
-	</section>
-
-
-	<section id="projekt2">
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Quiz o planetach</h1>
-				<div id="quiz-section">
-					<p id="question-text"></p>
-					<input type="number" id="answer-input" placeholder="Twoja odpowiedź">
-					<button id="submit-answer" onclick="submitAnswer()">Zatwierdź odpowiedź</button>
-					<button id="next-question" onclick="nextQuestion()">Następne pytanie</button>
-					<p id="score-display"></p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			let currentQuestionIndex = 0;
-			let score = 0;
-			let userAnswers = [];
-
-			const questions = [
-				['Ile księżyców ma Ziemia?', 1],
-				['Ile księżyców ma Saturn?', 62],
-				['Ile księżyców ma Wenus?', 0],
-				['Ile księżyców ma Mars?', 2],
-				['Ile księżyców ma Jowisz?', 79]
-			];
-
-			const questionText = document.getElementById('question-text');
-			const answerInput = document.getElementById('answer-input');
-			const submitAnswerBtn = document.getElementById('submit-answer');
-			const nextQuestionBtn = document.getElementById('next-question');
-			const scoreDisplay = document.getElementById('score-display');
-
-			function displayQuestion() {
-				if (currentQuestionIndex < questions.length) {
-					questionText.innerText = questions[currentQuestionIndex][0];
-					scoreDisplay.innerText = `Aktualny wynik: ${score} z ${questions.length}`;
-					answerInput.value = '';
-					nextQuestionBtn.style.display = 'none';
-					submitAnswerBtn.style.display = 'inline-block';
-					answerInput.style.display = 'inline-block';
-				} else {
-					displayFinalScore();
-				}
-			}
-
-			function testQuestion(question, answer) {
-				if (answer === question[1]) {
-					score++;
-					alert(`Pytanie: ${question[0]}\nTwoja odpowiedź: ${answer}\nPrawidłowa odpowiedź!`);
-				} else {
-					alert(`Pytanie: ${question[0]}\nTwoja odpowiedź: ${answer}\nBłędna odpowiedź. Prawidłowa odpowiedź to: ${question[1]}`);
-				}
-			}
-
-			function submitAnswer() {
-				let userAnswer = parseInt(answerInput.value);
-				if (!isNaN(userAnswer)) {
-					userAnswers.push(userAnswer);
-					testQuestion(questions[currentQuestionIndex], userAnswer);
-					scoreDisplay.innerText = `Aktualny wynik: ${score} z ${questions.length}`;
-					submitAnswerBtn.style.display = 'none';
-					nextQuestionBtn.style.display = 'inline-block';
-				} else {
-					alert('Wprowadź poprawną liczbę!');
-				}
-			}
-
-			function nextQuestion() {
-				currentQuestionIndex++;
-				displayQuestion();
-			}
-
-			function displayFinalScore() {
-				let summary = 'Koniec quizu! Oto podsumowanie:\n\n';
-
-				questions.forEach((question, index) => {
-					summary += `Pytanie: ${question[0]}\n`;
-					summary += `Twoja odpowiedź: ${userAnswers[index]}\n`;
-					summary += `Prawidłowa odpowiedź: ${question[1]}\n\n`;
-				});
-
-				summary += `Twój wynik to: ${score} z ${questions.length}.`;
-				alert(summary);
-
-				questionText.innerText = `Koniec quizu! Twój wynik to: ${score} z ${questions.length}.`;
-				answerInput.style.display = 'none';
-				submitAnswerBtn.style.display = 'none';
-				nextQuestionBtn.style.display = 'none';
-			}
-
-			submitAnswerBtn.addEventListener('click', submitAnswer);
-			nextQuestionBtn.addEventListener('click', nextQuestion);
-
-			displayQuestion();
-		});
-
-	</script>
-
-	<footer>
-		<div class="container" style="margin-top: 5%">
-			<button type="button" class="btn btn-link" data-toggle="modal"
-				data-target="#myModal">Polityka prywatności</button>
-		</div>
-	</footer>
-
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel1">Polityka prywatności</h4>
-				</div>
-				<div class="modal-body">polityka prywatności...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-warning btn-sm"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="ModalForm" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel2">Kontakt</h4>
-				</div>
-				<div class="modal-body">
-					<section id="form" style="margin-top: 5%">
-						<form action="index.html#kontakt" method="post"
-							onsubmit="return checkForm();">
-							<fieldset>
-								<div class="row">
-									<div class="col-md-12">
-										<p class="hide" id="errorName">Podanie imienia jest
-											wymagane!</p>
-									</div>
-								</div>
-								<div class="row" id="success">
-									<div class="col-md-2" align="right">
-										<label class="control-label" for="contactName">Imię</label>
-									</div>
-									<div class="col-md-4">
-										<input type="text" class="form-control " id="contactName"
-											aria-describedby="inputSuccess5Status" onblur="checkName()" />
-										<span class="hide" aria-hidden="true" id="true"></span> <span
-											id="inputSuccess5Status" class="sr-only">(success)</span>
-									</div>
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-md-12">
-										<p class="hide" id="errorLastName">Podanie nazwiska jest
-											wymagane!</p>
-									</div>
-								</div>
-								<div class="row" id="success2">
-									<div class="col-md-2" align="right">
-										<label class="control-label" for="contactLastName">Nazwisko</label>
-									</div>
-									<div class="col-md-4">
-										<input type="text" class="form-control " id="contactLastName"
-											aria-describedby="inputSuccess5Status"
-											onblur="checkLastName()" /> <span class="hide"
-											aria-hidden="true" id="true2"></span> <span
-											id="inputSuccess5Status2" class="sr-only">(success)</span>
-									</div>
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-md-12">
-										<p class="hide" id="errorEmail">Podanie emaila jest
-											wymagane!</p>
-										<p class="hide" id="errorEmail2">Błędny email!</p>
-									</div>
-								</div>
-								<div class="row" id="success3">
-									<div class="col-md-2" align="right">
-										<label class="control-label" for="contactEmail">Email</label>
-									</div>
-									<div class="col-md-4">
-										<input type="text" class="form-control " id="contactEmail"
-											aria-describedby="inputSuccess5Status" onblur="checkEmail()" />
-										<span class="hide" aria-hidden="true" id="true3"></span> <span
-											id="inputSuccess5Status3" class="sr-only">(success)</span>
-									</div>
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-md-2" align="right">
-										<label for="information">Informacje</label>
-									</div>
-									<div class="col-md-4">
-										<textarea name="Informacje" cols="30" rows="7" id="Info"
-											maxlength="250"></textarea>
-									</div>
-								</div>
-								<br>
-								<div class="row ">
-									<div class="col-md-2"></div>
-									<div class="col-md-3">
-										<input class="btn btn-primary" type="submit" value="Wyślij" />
-									</div>
-								</div>
-							</fieldset>
-						</form>
-					</section>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-warning btn-sm"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/ie10-viewport-bug-workaround.js"></script>
-	<script src="js/forms.js"></script>
-
+    <!-- Bootstrap JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
-
 </html>
